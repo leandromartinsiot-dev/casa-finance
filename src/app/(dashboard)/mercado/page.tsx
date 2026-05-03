@@ -5,3 +5,5 @@ export default async function MercadoPage() {
   const profile = await getCurrentProfile()
   return <MercadoClient isAdmin={profile?.role === 'ADMIN'} />
 }
+
+export const dynamic = 'force-dynamic'

@@ -32,3 +32,5 @@ export default async function HistoricoPage() {
 
   return <HistoricoClient entries={entries} />
 }
+
+export const dynamic = 'force-dynamic'

@@ -15,3 +15,5 @@ export default async function ContasPage() {
     />
   )
 }
+
+export const dynamic = 'force-dynamic'
