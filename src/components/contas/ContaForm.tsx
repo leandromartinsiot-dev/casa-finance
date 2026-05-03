@@ -28,7 +28,7 @@ export function ContaForm({ defaultValues, onSuccess }: Props) {
 
   const { register, handleSubmit, watch, formState: { errors } } =
     useForm<ContaFormData>({
-      resolver: zodResolver(ContaSchema),
+      resolver: zodResolver(ContaSchema) as any,
       defaultValues: {
         tipo:       (defaultValues?.tipo as ContaFormData['tipo']) ?? 'energia',
         descricao:  defaultValues?.descricao ?? '',

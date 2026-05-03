@@ -21,7 +21,7 @@ export function usePurchases() {
     setLoading(false)
   }
 
-  useEffect(() => { loadDespesas() }, [])
+  useEffect(() => { void loadDespesas() }, [])
 
   const addItem = useCallback((item: ItemCompraFormData) => {
     setItens((prev) => [...prev, { ...item, id: crypto.randomUUID() }])

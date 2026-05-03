@@ -27,7 +27,7 @@ export function useFuel(veiculo?: string) {
 
   useEffect(() => { load() }, [veiculo])
 
-  const create = (data: AbastecimentoFormData) =>
+  const create = async (data: AbastecimentoFormData): Promise<{ error?: string }> =>
     startTransition(async () => {
       const result = await createAbastecimento(data)
       if (!result.error) await load()

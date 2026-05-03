@@ -25,7 +25,7 @@ export function useMarket(listaId?: string) {
     setListaActual(data as ListaMercadoComItens)
   }
 
-  useEffect(() => { loadListas() }, [])
+  useEffect(() => { void loadListas() }, [])
   useEffect(() => { if (listaId) loadLista(listaId) }, [listaId])
 
   const addItem = (data: Parameters<typeof upsertItem>[0]) =>

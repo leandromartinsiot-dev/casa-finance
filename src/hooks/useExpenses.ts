@@ -24,19 +24,17 @@ export function useExpenses() {
 
   useEffect(() => { load() }, [])
 
-  const create = (data: ContaFormData) =>
-    startTransition(async () => {
-      const result = await createConta(data)
-      if (!result.error) await load()
-      return result
-    })
+  const create = async (data: ContaFormData): Promise<{ error?: string }> => {
+    const result = await createConta(data)
+    if (!result.error) await load()
+    return result
+  }
 
-  const update = (id: string, data: Partial<ContaFormData>) =>
-    startTransition(async () => {
-      const result = await updateConta(id, data)
-      if (!result.error) await load()
-      return result
-    })
+  const update = async (id: string, data: Partial<ContaFormData>): Promise<{ error?: string }> => {
+    const result = await updateConta(id, data)
+    if (!result.error) await load()
+    return result
+  }
 
   const remove = (id: string) =>
     startTransition(async () => {
