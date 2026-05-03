@@ -76,7 +76,7 @@ export function CombustivelClient({ isAdmin }: { isAdmin: boolean }) {
       ),
     },
     {
-      key: 'preco_litro', label: '€/L', align: 'right' as const,
+      key: 'preco_litro', label: '€/L', align: 'right' as const, hideOnMobile: true,
       render: (r: Abastecimento) => (
         <span className="font-mono text-slate-500">
           {r.preco_litro ? `${Number(r.preco_litro).toFixed(3)} €` : '—'}
@@ -101,9 +101,9 @@ export function CombustivelClient({ isAdmin }: { isAdmin: boolean }) {
   ]
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4 md:space-y-5">
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <h1 className="text-xl font-bold text-slate-900">Combustível</h1>
+        <h1 className="text-lg md:text-xl font-bold text-slate-900">Combustível</h1>
         <div className="flex gap-2">
           <ExportMenu onExportCSV={handleExportCSV} onExportPDF={handleExportPDF}
             disabled={!abastecimentos.length} />
@@ -115,10 +115,13 @@ export function CombustivelClient({ isAdmin }: { isAdmin: boolean }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
+      {/* 2 colunas no mobile, 3 no desktop */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         <StatCard label="Total gasto"   value={fmt(totalGasto)}               icon={Fuel}         />
         <StatCard label="Total litros"  value={`${totalLitros.toFixed(1)} L`} icon={TrendingDown} />
-        <StatCard label="Preço médio/L" value={`${precoMedio.toFixed(3)} €`}  icon={Fuel}         />
+        <div className="col-span-2 md:col-span-1">
+          <StatCard label="Preço médio/L" value={`${precoMedio.toFixed(3)} €`} icon={Fuel} />
+        </div>
       </div>
 
       <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
@@ -130,14 +133,14 @@ export function CombustivelClient({ isAdmin }: { isAdmin: boolean }) {
       </div>
 
       {consumo.length > 0 && (
-        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 md:p-5">
           <h2 className="text-sm font-semibold text-slate-700 mb-3">Por veículo</h2>
           <div className="space-y-2">
             {consumo.map((v: any) => (
               <div key={v.veiculo} className="flex items-center gap-3">
-                <span className="text-sm font-medium text-slate-700 flex-1">{v.veiculo}</span>
-                <span className="text-xs text-slate-400">{Number(v.total_litros).toFixed(1)} L</span>
-                <span className="text-sm font-mono font-semibold">{fmt(Number(v.total_gasto))}</span>
+                <span className="text-sm font-medium text-slate-700 flex-1 truncate">{v.veiculo}</span>
+                <span className="text-xs text-slate-400 shrink-0">{Number(v.total_litros).toFixed(1)} L</span>
+                <span className="text-sm font-mono font-semibold shrink-0">{fmt(Number(v.total_gasto))}</span>
               </div>
             ))}
           </div>

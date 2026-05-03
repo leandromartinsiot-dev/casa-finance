@@ -19,24 +19,29 @@ const VARIANTS = {
 
 export function StatCard({ label, value, sub, icon: Icon, variant = 'default', loading }: Props) {
   return (
-    <div className="bg-white rounded-xl border border-slate-200 p-4 md:p-5 shadow-sm">
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide truncate">
+    <div className="bg-white rounded-xl border border-slate-200 p-3 md:p-5 shadow-sm">
+      <div className="flex flex-col gap-2">
+        {/* Ícone e label */}
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">
             {label}
           </p>
-          {loading ? (
-            <div className="h-7 w-28 bg-slate-100 animate-pulse rounded mt-1.5" />
-          ) : (
-            <p className="text-2xl font-bold text-slate-900 mt-0.5 font-mono tabular-nums">
-              {value}
-            </p>
-          )}
-          {sub && <p className="text-xs text-slate-400 mt-1">{sub}</p>}
+          <div className={cn('p-1.5 rounded-lg border shrink-0', VARIANTS[variant])}>
+            <Icon size={16} />
+          </div>
         </div>
-        <div className={cn('p-2.5 rounded-lg border shrink-0', VARIANTS[variant])}>
-          <Icon size={20} />
-        </div>
+
+        {/* Valor */}
+        {loading ? (
+          <div className="h-7 w-full bg-slate-100 animate-pulse rounded" />
+        ) : (
+          <p className="text-xl md:text-2xl font-bold text-slate-900 font-mono tabular-nums break-all">
+            {value}
+          </p>
+        )}
+
+        {/* Sub */}
+        {sub && <p className="text-xs text-slate-400">{sub}</p>}
       </div>
     </div>
   )

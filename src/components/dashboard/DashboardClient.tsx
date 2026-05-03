@@ -56,18 +56,19 @@ export function DashboardClient({ contas, abastecimentos, despesas }: Props) {
   }, [contas, abastecimentos, despesas])
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       <div>
-        <h1 className="text-xl font-bold text-slate-900">Dashboard</h1>
+        <h1 className="text-lg md:text-xl font-bold text-slate-900">Dashboard</h1>
         <p className="text-sm text-slate-500 mt-0.5">
           {now.toLocaleDateString('pt-PT', { month: 'long', year: 'numeric' })}
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+      {/* KPIs — 2 colunas no mobile, 4 no desktop */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <StatCard
-          label="Total do mês" value={fmt(totalMes)}
-          sub="todas as categorias" icon={TrendingUp}
+          label="Total mês" value={fmt(totalMes)}
+          sub="todas categorias" icon={TrendingUp}
         />
         <StatCard
           label="Contas" value={fmt(stats.totalContasMes)}
@@ -85,8 +86,9 @@ export function DashboardClient({ contas, abastecimentos, despesas }: Props) {
         />
       </div>
 
+      {/* Gráfico + Alertas — empilhados no mobile */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+        <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 p-4 md:p-5 shadow-sm">
           <h2 className="text-sm font-semibold text-slate-700 mb-4">
             Despesas — últimos 6 meses
           </h2>
