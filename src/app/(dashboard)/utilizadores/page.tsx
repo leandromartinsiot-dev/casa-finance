@@ -7,3 +7,4 @@ export default async function UtilizadoresPage() {
   const { data: users } = await getUsers()
   return <UsersClient initialUsers={users ?? []} />
 }
+export const dynamic = 'force-dynamic'
